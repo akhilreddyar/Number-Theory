@@ -1,0 +1,36 @@
+static int[] phi = new int[n+1];
+    static void seivePhi(long n){
+    // can be used to generate and used to answer queries in o(1)
+        for(int i = 0;i<n;i++)
+            phi[i]=i;
+        for(int i=2;i*i<=n;i++){
+            if(phi[i]==i){
+                for(int j = i;j<1000001;j+=i){
+                    phi[j] = (phi[j]/i)*(i-1);
+                }
+            }
+        }
+    }
+    public int gcd(int k){
+        int res = 0;
+        /// this is a function which return the sum of the gcd of numbers from 1 to N;
+        // summation i = 1 to N  gcd(i,N);
+        // first we need to find the divisors of  N 
+        // for every divisior we need to find how many times it values is contributing to the sum
+        // for ex:- we get div as 4
+        // so we need to find the number of numbers from x-values so that gcd(x,N) = 4
+        // this can be rewritable as gcd(x/4,N/4)=1;
+        // so ie.. no of numbers which has gcd 1 we can use seivephi to get in o(1) or o(sqrt(n)) in Euler Toeint function
+        for(int i  = 1;i*i<=k;i++){
+            if(k%i==0){
+                if(k/i == i)
+                res+= i * phi[k/i];
+                // phi sholud be o(1)
+                else{
+                    res+= i * phi[k/i];
+                    res += (k/i) * phi[k/(k/i)];
+                }
+            }
+        }
+        return res;
+    }
