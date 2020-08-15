@@ -1,0 +1,26 @@
+I say this is kinda tricky since we are given the node to be deleted as we know that we can only delete cur node if we have prev node and set prevnode.next as curnode.next;
+But here there is no prev node so what we can do One thing we can do is to shift all the next node values 1 step and delete the last node;
+ **void deleteNode(Node node)
+    {
+        Node temp = node;
+        Node prev  = null;;
+        while(temp.next!=null){
+            temp.data = temp.next.data;
+            prev=temp;
+            temp = temp.next;
+        }
+        prev.next=null;
+         
+    }**
+    Time complexity is o(n) as if we are required to delete the first node then we need to copy n-1 nodes ;
+    
+    Another approch can be copy the next node contents to cur node and delete the second node;
+    **void deleteNode(Node node)
+    {
+         Node temp = node;
+         node.data = temp.next.data;
+         node.next=temp.next.next;
+            
+    }**
+    Time complexity is o(1)
+    // NOTE:This wont work if the node to be deleted is last
