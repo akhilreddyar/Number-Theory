@@ -1,0 +1,54 @@
+class Solution {
+    public void trav(ListNode root){
+        if(root==null) return ;
+        System.out.print(root.val+" ");
+        trav(root.next);
+    }
+    public ListNode reverseList(ListNode head) {
+        ListNode cur=head,prev=null,next=null;
+        while(cur!=null){
+            next=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=next;
+        }
+        return prev;
+    }
+    public boolean isPalindrome(ListNode head) {
+        if(head==null) return true;
+        if(head.next==null) return true;
+    //reverse half part  and traverse
+    //Stack is also efficient but with o(n) extra space
+    ListNode slow =head,fast=head,sp=null,fp=null,prev=null;
+        boolean odd = false;
+    while(fast!=null){
+        if(fast.next==null){
+            odd=true;
+            break;
+        }
+        fast=fast.next.next;
+        prev=slow;
+        slow=slow.next;
+    }
+        sp = slow;
+        prev.next=null;
+        System.out.println(odd);
+        System.out.println(sp.val);
+        if(odd)
+            sp=sp.next;
+        fp = head;
+        sp = reverseList(sp);
+        // trav(fp);
+        // trav(sp);
+        while(sp!=null&&fp!=null){
+            if(sp.val!=fp.val) return false;
+            sp=sp.next;
+            fp=fp.next;     
+        }
+         if(sp!=null && fp==null)
+                return false;
+        else if(sp==null && fp!=null)
+                return false;
+        return true;
+    }
+}
