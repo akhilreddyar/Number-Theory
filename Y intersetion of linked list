@@ -1,0 +1,17 @@
+
+// brute force using hashmap
+//efficent using some mutliplication
+	int intersectPoint(Node headA, Node headB)
+	{  Node temp = headA;
+         while(temp!=null){
+             temp.data = 1000000+temp.data;
+             temp=temp.next;
+         }
+         Node temp2 = headB;
+         while(temp2!=null){
+             if(temp2.data>=1000000)
+                return temp2.data-1000000;
+            temp2=temp2.next;
+         }
+        return -1;
+	}
