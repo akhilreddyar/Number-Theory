@@ -1,0 +1,23 @@
+as regular use slow and fast pointer but for pos just init one at head and move 1 at a time
+
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow=head,fast = head;
+        while(slow!=null&&fast!=null&&fast.next!=null){
+            slow = slow.next;
+            fast=fast.next.next;
+            if(slow==fast) {
+                slow = head;
+                int count=0;
+                while(slow!=fast){
+                    count++;
+                    slow = slow.next;
+                    fast=fast.next;
+                }
+               // System.out.println(count);
+                return slow;
+            }
+        }
+        return null;
+    }
+}
